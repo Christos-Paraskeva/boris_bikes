@@ -1,4 +1,4 @@
-require 'docking_station'
+ require 'docking_station'
 
 # describe 'docking_station' do
 #   it "passed" do
