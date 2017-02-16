@@ -38,20 +38,22 @@
 require_relative 'bike'
 
 module DefaultCapacity
-  LOW=20
+  LOW=10
+  DEFAULT=20
   HIGH=50
 end
 
 class DockingStation
-  
+
   # module DefaultCapacity
 #     LOW=20
 #   end
-  
-   attr_reader :bikes
 
-   def initialize
+   attr_accessor :bikes, :capacity
+
+   def initialize(capacity=20)
      @bikes = []
+     @capacity = capacity
    end
 
    def release_bike
@@ -63,9 +65,9 @@ class DockingStation
      fail 'Docking station full' if full?
      @bikes << bike
    end
-   
+
    private
-   
+
    def full?
      if @bikes.count >= DefaultCapacity::LOW
        true
@@ -73,7 +75,7 @@ class DockingStation
        false
      end
    end
-   
+
    def empty?
      if @bikes.empty?
        true
