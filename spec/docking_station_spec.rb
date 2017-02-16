@@ -1,4 +1,5 @@
 require 'docking_station'
+include DefaultCapacity
 
 describe DockingStation do
 
@@ -45,7 +46,7 @@ describe DockingStation do
 
  describe '#dock' do
    it 'raises an error when full' do
-     20.times { subject.dock Bike.new }
+     DefaultCapacity::LOW.times { subject.dock Bike.new }
      expect { subject.dock Bike.new }.to raise_error 'Docking station full'
    end
  end
