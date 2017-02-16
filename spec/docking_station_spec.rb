@@ -1,35 +1,53 @@
- require 'docking_station'
+require 'docking_station'
 
 describe DockingStation do
-  it { is_expected.to respond_to(:release_bike) }
-  
-  
-  it "should get a bike which is working" do
-    # expect from bike.working? == true
-    expect(Bike.new.working?).to eq true
-  end
-  
-  it "should check if bike has been docked" do
-    bike = Bike.new
-    subject.dock_bike(bike)
-    expect(subject.bike).to eq bike
-end
-end
 
-describe '#release_bike' do
-  it 'should tell the user that there are no bikes available' do
-    # bike = Bike.new
-#     subject.dock_bike(bike)
-   expect { subject.release_bike }.to raise_error 'no bikes available'
-end
-end
+ it { is_expected.to respond_to :release_bike}
 
-# describe DockingStation do
-#   it { is_expected.to respond_to(:docked_bikes) }
-# end
+ describe '#release_bike' do
+     it 'releases a bike' do
+     bike = Bike.new
+     subject.dock(bike)
+     expect(subject.release_bike).to eq bike
+   end
+ end
 
-# describe DockingStation do
-#   it "instance variable should be the same as the new bike created" do
-#     expect(Bike.new.dock).to eq true
-#   end
-# end
+ it { is_expected.to respond_to(:dock).with(1).argument }
+
+
+ it 'docks something' do
+   bike = []
+   bike = Bike.new
+
+   # subject.dock(bike)
+   expect(subject.dock(bike).count).to eq 1
+ end
+
+ it 'returns docked bikes' do
+     bike = []
+     bike = Bike.new
+     # subject.dock(bike)
+     expect(subject.dock(bike).count).to eq 1
+ end
+
+ describe '#release_bike' do
+   it 'raises an error when there are no bikes available' do
+   expect { subject.release_bike }.to raise_error 'No bikes available'
+   end
+ end
+
+ # describe '#dock' do
+ #   it 'raises an error when full' do
+ #     subject.dock(Bike.new)
+ #     expect { subject.dock (Bike.new) }.to raise_error 'Docking station full'
+ #   end
+ # end
+
+ describe '#dock' do
+   it 'raises an error when full' do
+     20.times { subject.dock Bike.new }
+     expect { subject.dock Bike.new }.to raise_error 'Docking station full'
+   end
+ end
+
+end
