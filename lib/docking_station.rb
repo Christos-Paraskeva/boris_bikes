@@ -45,15 +45,15 @@ end
 
 class DockingStation
 
-  # module DefaultCapacity
-#     LOW=20
-#   end
+   attr_reader :bikes, :capacity
 
-   attr_accessor :bikes, :capacity
-
-   def initialize(capacity=20)
+   def initialize(capacity=DefaultCapacity::DEFAULT)
      @bikes = []
      @capacity = capacity
+   end
+   
+   def display_bikes
+     puts @bikes
    end
 
    def release_bike
@@ -69,7 +69,7 @@ class DockingStation
    private
 
    def full?
-     if @bikes.count >= DefaultCapacity::LOW
+     if @bikes.count >= DefaultCapacity::DEFAULT
        true
      else
        false
