@@ -36,17 +36,22 @@ describe DockingStation do
    expect { subject.release_bike }.to raise_error 'No bikes available'
    end
  end
- 
- it 'report broken bike', :focus => true do
-   broken = []
-   #broken = Bike.new
-   expect(subject.return_broken_bike?(broken)).to eq true
- end 
- 
+
+ # it 'report broken bike', :focus => true do
+ it { is_expected.to respond_to :dock_broken}
+
+
+
+
+
+  #  broken = []
+  #  #broken = Bike.new
+  #  expect(subject.return_broken_bike?(broken)).to eq false
+
      # it 'set default capacity to 20' do
  #   expect{subject.capacity}.to eq DockingStation.DefaultCapacity::DEFAULT
  # end
- 
+
 
  # describe '#dock' do
 #    it 'raises an error when full' do
@@ -59,6 +64,13 @@ describe DockingStation do
    it 'raises an error when full' do
      DefaultCapacity::DEFAULT.times { subject.dock Bike.new }
      expect { subject.dock Bike.new }.to raise_error 'Docking station full'
+   end
+ end
+
+ describe '#dock_broken', :focus6 => true do
+   it 'raises an error when broken' do
+     DefaultCapacity::DEFAULT.times { subject.dock_broken Bike.new }
+     expect { subject.dock_broken Bike.new }.to raise_error 'Docking station full'
    end
  end
 

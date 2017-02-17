@@ -52,17 +52,17 @@ class DockingStation
      @capacity = capacity
      @broken = []
    end
-   
 
-   def return_broken_bike?(broken)
-     @broken = broken
-     if (@broken.count != 0)
-       true
-     else
-       false
-     end
-   end
-   
+
+  #  def return_broken_bike?(broken)
+  #    @broken = broken
+  #    if (@broken.count != 0)
+  #      true
+  #    else
+  #      false
+  #    end
+  #  end
+
    def release_bike
      fail 'No bikes available' if empty?
      @bikes.pop
@@ -78,17 +78,19 @@ class DockingStation
        @bikes << bike
  #     end
    end
-   
+
    def dock_broken(bike)
      fail 'Docking station full' if full?
      @broken << bike
+
    end
-   
+
 
    private
 
    def full?
-     if @bikes.count >= DefaultCapacity::DEFAULT
+    #  bike_count = @broken.count + @bikes.count
+     if (@bikes.count + @broken.count) >= DefaultCapacity::DEFAULT
        true
      else
        false
