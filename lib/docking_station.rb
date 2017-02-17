@@ -45,26 +45,45 @@ end
 
 class DockingStation
 
-   attr_reader :bikes, :capacity
+   attr_reader :bikes, :capacity, :broken
 
    def initialize(capacity=DefaultCapacity::DEFAULT)
      @bikes = []
      @capacity = capacity
+     @broken = []
    end
    
-   def display_bikes
-     puts @bikes
-   end
 
+   def return_broken_bike?(broken)
+     @broken = broken
+     if (@broken.count != 0)
+       true
+     else
+       false
+     end
+   end
+   
    def release_bike
      fail 'No bikes available' if empty?
      @bikes.pop
    end
-
+   # fix rspec to work with gets.chomp
    def dock(bike)
      fail 'Docking station full' if full?
-     @bikes << bike
+     # puts "Would you like to report the bike as broken? (y/n)"
+ #     ans = gets.chomp.downcase
+ #     if (ans != "n")
+ #       return_broken_bike?
+ #     else
+       @bikes << bike
+ #     end
    end
+   
+   def dock_broken(bike)
+     fail 'Docking station full' if full?
+     @broken << bike
+   end
+   
 
    private
 
